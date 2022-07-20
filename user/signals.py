@@ -40,11 +40,11 @@ def send_email(sender, instance, **kwargs):
         print(message)
         sendgrid_client.send(message=message)
 
-@receiver(post_save, sender=Profile)
-def add_email_receiver(sender, instance, created, **kwargs):
-    if created and not kwargs.get('raw', False):
-        Profile.objects.create(email_receiver=instance)
+# @receiver(post_save, sender=Profile)
+# def add_email_receiver(sender, instance, created, **kwargs):
+#     if created and not kwargs.get('raw', False):
+#         Profile.objects.create(email_receiver=instance)
 
-@receiver(post_save, sender=Profile)
-def remove_email_receiver(sender, instance, **kwargs):
-    instance.profile.save()
+# @receiver(post_save, sender=Profile)
+# def remove_email_receiver(sender, instance, **kwargs):
+#     instance.profile.save()
