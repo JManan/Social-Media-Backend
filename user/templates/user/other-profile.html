@@ -1,0 +1,81 @@
+{% extends 'app/base.html' %}
+    {% block content %}
+    <body>
+    <div class='content-section'>
+        <div class='media'>
+            <style> 
+            img{
+                border-radius: 5px;
+                width:60px;
+                height:60px;
+            }
+        </style>
+            <div class='media-body'>
+                <img src='{{ profile.image.url }}'>
+                <h2 class='account-heading'> {{user.username}}</h2>
+                <p class='text-secondary'> Email Address - {{user.email}}
+                    <br>
+                     Location - {{profile.address}}
+                    <br>
+                    Contact Number - {{profile.number}}
+                    <br>
+                     Age - {{profile.age}}
+                    <br>
+                    Number of Followers = {{number_of_followers}}</p>
+                                        </div>
+                            </div>
+        </div> 
+<!-- Button trigger modal -->
+  {% if user != request.user %}
+                    {% if is_following %}
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Unfollow
+</button>
+{% else %}
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Follow</button>
+                     {% endif %}
+                        {% endif %} 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Email Notification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% if is_following %}
+        <p> Would you like to stop receiving email notification when this author posts a new Post?</p>
+        {% else %}  
+        <p> Would you like to receive email notification when this author posts a new Post?</p>
+      {% endif %}  
+  </div>
+      <div class="modal-footer">
+        {% if user != request.user %}
+        {% if is_following %}
+        <form method="POST" action="{% url 'remove-follower' profile.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        </form>
+                    <form method="POST" action="{% url 'remove-email-receiver' profile.pk %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-success">Yes</button>
+                    </form>
+                </div>
+        {% else %} 
+                    <form method="POST" action="{% url 'add-follower' profile.pk %}">
+                      {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">No</button>  
+                    </form>
+                    <form method="POST" action="{% url 'add-email-receiver' profile.pk %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-success">Yes</button>
+                    </form>
+                      {% endif %}
+                        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+    {% endblock %}

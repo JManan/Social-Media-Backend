@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<h1> Welcome to Edit a post page!</h1>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class='form-group'>
+            <legend class='border-bottom mb-4'>Edit Post</legend>
+            {{form}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg active" a href="{% url 'detail' post.id %}" role="button" type='submit' aria-pressed="true">Save Changes</a>
+            </div>
+    </form>
+</div>
+{% endblock content %}

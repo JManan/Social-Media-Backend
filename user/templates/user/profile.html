@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %}
+
+    {% block content %}
+    <div>
+        {% for message in messages %}
+        {{message}}
+        {% endfor %}
+    </div>
+    <div class='content-section'>
+        <div class='media'>
+            <style> 
+            img{
+                border-radius: 5px;
+                width:60px;
+                height:60px;
+            }
+        </style>
+            <div class='media-body'>
+                <img src='{{ user.profile.image.url }}''>
+                <h2 class='account-heading'> {{user.username}}</h2>
+                <p class='text-secondary'> Email Address - {{user.email}}
+                    <br>
+                     Location - {{user.profile.address}}
+                    <br>
+                    Contact Number - {{user.profile.number}}
+                    <br>
+                     Age - {{user.profile.age}}
+                    <br>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+    {% load crispy_forms_tags %}
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class='form-group'>
+            <legend class='border-bottom mb-4'>Update Profile</legend>
+        {{u_form|crispy}}
+        {{p_form|crispy}}
+        </fieldset>
+    <div class="form-group ">
+        <button class='btn btn-outline-success' type='submit'>Save Changes</button>
+</form>
+{% if request.user.is_staff %}
+<form>
+</form>
+<a href='{% url "user-data" %}'">Download Users Data</a>
+</div>
+{% endif %}
+    {% endblock content %}
+    

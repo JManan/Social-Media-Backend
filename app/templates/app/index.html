@@ -1,0 +1,41 @@
+{% extends './base.html' %}
+
+    {% block content %}
+    {% if messages %}
+    {% for message in messages %}
+        <div class="text-center alert alert-{{ message.tags }}">
+            {{ message|safe }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    {% for post in PostList %}
+<div class="align-content-around">
+    <div class='content-section'>
+        <div class='media'>
+            <style> 
+            img{
+                border-radius: 5px;
+                width:60px;
+                height:60px;
+            }
+        </style>
+    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt="default">
+    <h4>Title -- {{ post.title }}</h4>
+    Author -- <a href="{% url "other-profile" post.author.pk %}">{{post.author}}</a><br>
+    <button onclick="location.href='{% url "detail" post.id %}'" type="button">Details</button>
+    <button onclick="location.href='{% url "edit-post" post.id %}'" type="button">Edit</button>
+    <button onclick="location.href='{% url "delete-post" post.id %}'" type="button">Delete</button>
+    {% endfor %}
+</div>
+    <hr>
+<div class="add">
+    <p><a href="{% url 'add-post' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add a Post</a></p>
+</div>
+    {% endblock content %}
+
+{% comment %} 
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.email = self.request.user
+        return super().form_valid(form) {% endcomment %}

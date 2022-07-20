@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <div class="text-center alert alert-{{ message.tags }}">
+        {{ message|safe }}
+    </div>
+{% endfor %}
+{% endif %}
+<p>
+<h2> Title -- {{ post.title }}</h2>
+    Author -- {{post.author}}
+    <br>Description -- {{ post.description }}<br>
+    date published -- {{ post.date_pb }}<br>
+</p>
+
+<div class="comment-section">
+<h3>Comment Section</h3>
+{% for comment in post.comments.all %}
+<p>
+    {{comment.name}}<br>
+    {{comment.date_pb}}<br>
+    {{comment.email}}<br></p>
+    <strong>Comment => {{comment.content}}<hr></strong>
+{% endfor %} 
+<hr>
+        <a href="{% url 'add-comment' post.id %}" >Add a comment</a>
+        
+{% comment %} </form> {% endcomment %}
+</div>
+{% endblock content %}

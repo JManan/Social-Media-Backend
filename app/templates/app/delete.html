@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1> Welcome to Delete a post page!</h1>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <form method="POST">
+            <h2>Are you sure you want to delete "{{object.title}}"?</h2>
+        <button type="submit" class="btn btn-danger" role="button" aria-pressed="true" a href="{% url 'index' %}">Delete</button>
+        <button onclick="location.href='{% url "detail" object.id %}'" type="button">Cancel</button>
+    </form>
+</div>
+{% endblock content %}

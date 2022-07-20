@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register-Page</title>
+</head>
+<body>
+    <h1> Welcome to register Page </h1>
+    {% load crispy_forms_tags %}
+   {% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class='form-group'>
+                <legend class='border-bottom mb-4'>Join Today</legend>
+            {{form|crispy}}
+            </fieldset>
+        <div class="form-group">
+            <button class='btn btn-outline-info' type='submit'>Sign Up</button>
+        </div>
+    </form>
+        <div class='border-top pt-3'>
+            <small class='text-muted'>Already Have An Account?
+            <a href='{% url "login" %}' class='ml-2'> Sign In </a>
+        </small>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html> 

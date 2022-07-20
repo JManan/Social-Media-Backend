@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1> Welcome to add a post page!</h1>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class='form-group'>
+            <legend class='border-bottom mb-4'>Add Post</legend>
+            {{form.as_p}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg active" role="button" type='submit' aria-pressed="true">Add a Post</a>
+            </div>
+    </form>
+</div>
+{% endblock content %}
