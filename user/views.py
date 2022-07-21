@@ -157,3 +157,15 @@ class Remove_Email_Receiver(LoginRequiredMixin, View):
         profile.followers.remove(request.user)
         profile.email_receivers.remove(request.user)
         return redirect('other-profile', profile.pk)
+@login_required
+def follwing(request):
+    following = Profile.objects.filter(followers=request.user)
+    context = {'following' : following}
+    return render(request, 'user/following.html', context)
+
+@login_required
+def relevantpost(request, pk):
+    profile = Profile.objects.get(pk=pk)
+    posts = PostList.objects.filter(author=profile.user)
+    context = {'posts' : posts}
+    return render(request, 'user/relevant-post.html', context)

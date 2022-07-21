@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+    
+    {% block content %}
+{% if following %}
+<p>
+    {% for following in following %}
+    You are following <a href="{% url 'relevant-post' following.user.pk %}" >{{ following.user }}</a>
+</p>
+{% endfor %}
+{% else %}
+<p>
+    You dont follow anyone 
+     <a href = '{% url "index" %}'>Click here to view post</a>
+</p>
+{% endif %}
+    {% endblock %}

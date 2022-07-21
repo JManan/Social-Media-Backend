@@ -21,6 +21,8 @@ urlpatterns = [
     path('profile/<int:pk>/followers/remove', user_views.RemoveFollower.as_view(), name='remove-follower'),
     path('profile/<int:pk>/followers/add/email-recevier/', user_views.Add_Email_Receiver.as_view(), name='add-email-receiver'),
     path('profile/<int:pk>/followers/remove/email-recevier/', user_views.Remove_Email_Receiver.as_view(), name='remove-email-receiver'),
+    path('following/', user_views.follwing, name='following'),
+    path('following/<int:pk>/', user_views.relevantpost, name="relevant-post"),
 ]
 
 if settings.DEBUG:

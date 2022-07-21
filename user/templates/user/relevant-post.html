@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<div class="content">
+    {% for post in posts %}
+    title : {{ post.title }}
+    <br>
+    content:{{ post.description }}
+    <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}
