@@ -1,9 +1,10 @@
 from django.db import models
-
+from django.utils.timezone import activate
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
+
 
 class PostList(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -16,7 +17,7 @@ class PostList(models.Model):
         ordering = ['-date_pb']
 
     def __str__(self):
-        return self.title, self.description
+        return f'{self.title} {self.description[0:3]}'
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"pk": self.id})

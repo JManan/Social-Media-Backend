@@ -51,8 +51,6 @@ class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
     # context_object_name = 'profile'
     # template_name = 'user/other-profile.html'
 
-    
-
     def get(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(user_id=pk)
         user = profile.user
@@ -85,9 +83,9 @@ class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
 class AddFollower(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
-        print(profile.followers.all, request.user)
+        # print(profile.followers.all, request.user)
         profile.followers.add(request.user)
-        print(profile.followers.all, request.user)
+        # print(profile.followers.all, request.user)
         return redirect('other-profile', profile.pk)
 
 class RemoveFollower(LoginRequiredMixin, View):
@@ -166,6 +164,6 @@ def follwing(request):
 @login_required
 def relevantpost(request, pk):
     profile = Profile.objects.get(pk=pk)
-    posts = PostList.objects.filter(author=profile.user)
+    posts = PostList.objects.filter(author=profile.user).order_by('-date_pb')
     context = {'posts' : posts}
     return render(request, 'user/relevant-post.html', context)
