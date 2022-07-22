@@ -12,15 +12,13 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['blog-dvm.azurewebsites.net']
+ALLOWED_HOSTS = ['blog-dvm.azurewebsites.net', 'localhost']
 
 
 
 INSTALLED_APPS = [
     'crispy_forms',
     'user.apps.UserConfig',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +38,8 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'dvm.wsgi.application'
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'test',  
-        'USER': 'root',  
-        'PASSWORD': 'manan',  
+        'NAME': 'blog-dvm.mysql.database.azure.com',  
+        'USER': 'manan',  
+        'PASSWORD': 'Admin123',  
         'HOST': '127.0.0.1',  
         'PORT': '3306',  
         'OPTIONS': {  
