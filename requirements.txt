@@ -1,0 +1,6 @@
+django
+django-crispy-forms
+Pillow
+openpyxl
+django-allauth
+whitenoise 
