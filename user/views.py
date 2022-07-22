@@ -1,6 +1,6 @@
-from decouple import config
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from decouple import config 
 from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm
@@ -89,7 +89,7 @@ class AddFollower(LoginRequiredMixin, View):
         return redirect('other-profile', profile.pk)
 
 class RemoveFollower(LoginRequiredMixin, View):
-    def post(self, request, pk, *args, *blog*kwargs):
+    def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.remove(request.user)
         return redirect('other-profile', profile.pk)
