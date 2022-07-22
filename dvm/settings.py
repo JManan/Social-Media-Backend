@@ -10,15 +10,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['blog-dvm.azurewebsites.net']
 
 
 
 INSTALLED_APPS = [
     'crispy_forms',
     'user.apps.UserConfig',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -159,3 +161,7 @@ LOGIN_URL = 'login'
 LOGOUT_REDIRECT_UTL = 'login'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'

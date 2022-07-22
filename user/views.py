@@ -89,7 +89,7 @@ class AddFollower(LoginRequiredMixin, View):
         return redirect('other-profile', profile.pk)
 
 class RemoveFollower(LoginRequiredMixin, View):
-    def post(self, request, pk, *args, **kwargs):
+    def post(self, request, pk, *args, *blog*kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.remove(request.user)
         return redirect('other-profile', profile.pk)
@@ -155,6 +155,7 @@ class Remove_Email_Receiver(LoginRequiredMixin, View):
         profile.followers.remove(request.user)
         profile.email_receivers.remove(request.user)
         return redirect('other-profile', profile.pk)
+         
 @login_required
 def follwing(request):
     following = Profile.objects.filter(followers=request.user)
