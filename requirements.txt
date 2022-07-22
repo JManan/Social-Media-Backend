@@ -3,4 +3,7 @@ django-crispy-forms
 Pillow
 openpyxl
 django-allauth
-whitenoise 
+whitenoise
+python-decouple
+sendgrid
+mysqlclient
