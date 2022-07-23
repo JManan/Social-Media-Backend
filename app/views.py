@@ -41,24 +41,6 @@ class CreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-    def send_email(self):
-        object = self.get_object(pk=self.request.form.pk)
-        print(object)
-        sendgrid_client = SendGridAPIClient(config('SENDGRID_API_KEY'))
-        from_email = From('f20212458@pilani.bits-pilani.ac.in')
-        l = ['f20212458@pilani.bits-pilani.ac.in',]
-        for receivers in self.object.author.profile.email_receivers.all():
-            l.append(receivers.email)
-        to_email = To(l)
-        subject = 'Sending with Twilio SendGrid is Fun'
-        plain_text_content = PlainTextContent(
-            'and easy to do anywhere, even with Python'
-        )
-        html_content = HtmlContent(
-            '<strong>and easy to do anywhere, even with Python</strong>'
-        )
-        message = Mail(from_email, to_email, subject, plain_text_content, html_content)
-        sendgrid_client.send(message=message)
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     print(kwargs)
