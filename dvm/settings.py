@@ -42,8 +42,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -77,13 +75,14 @@ WSGI_APPLICATION = 'dvm.wsgi.application'
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'blog-dvm.mysql.database.azure.com',  
-        'USER': 'manan',  
+        'NAME': 'manan',  
+        'USER': 'manan@blog-dvm',  
         'PASSWORD': 'Admin123',  
-        'HOST': '127.0.0.1',  
+        'HOST': 'blog-dvm.mysql.database.azure.com',  
         'PORT': '3306',  
         'OPTIONS': {  
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+            # 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+            # "sslmode": "require"
         }  
     }  
 }  
