@@ -18,6 +18,8 @@ def create_profile(sender, instance, created, **kwargs):
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+# @reciever
+
 @receiver(post_save, sender=PostList)
 def send_email(sender, instance, **kwargs):
     sendgrid_client = SendGridAPIClient(config('SENDGRID_API_KEY'))
@@ -25,10 +27,10 @@ def send_email(sender, instance, **kwargs):
     print(instance.author.email)
     l = []
     for receivers in instance.author.profile.email_receivers.all():
-        l.append(receivers.email)
+        l.append(To(receivers.email))
     print(l)
     if len(l) != 0:
-        to_email = To(l)
+        to_email = l
         subject = 'New Blog Posted'
         plain_text_content = PlainTextContent(
         "check out this new blog!!" 
@@ -39,6 +41,8 @@ def send_email(sender, instance, **kwargs):
         message = Mail(from_email, to_email, subject, plain_text_content, html_content)
         print(message)
         sendgrid_client.send(message=message)
+
+
 
 # @receiver(post_save, sender=Profile)
 # def add_email_receiver(sender, instance, created, **kwargs):
